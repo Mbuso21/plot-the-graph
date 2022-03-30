@@ -1,12 +1,9 @@
-from tkinter.tix import MAIN
-from unittest.main import main
 from urllib import response
-
-from flask import request
-import plotext as plt
 import matplotlib.pyplot as mpl
 from datetime import datetime
 import requests as req
+from datetime import date
+import json
 
 def work():
     y = []
@@ -30,13 +27,18 @@ def work():
         "15-01-2022":90000
     }
 
-    # response = request.get("http://sam-user-activity.eu-west-1.elasticbeanstalk.com/")
+    response = req.get("http://sam-user-activity.eu-west-1.elasticbeanstalk.com/")
 
-    # print(response)
+    response_text = response.text
+    json_data = json.loads(response_text)
+    print(json_data)
+    print(type(json_data))
+    print(type(response_text))
+
 
     print(datetime.strptime('01-01-2022', '%d-%m-%Y'))
 
-    for k in api_data:
+    for k in json_data:
         y.append(datetime.strptime(k, '%d-%m-%Y'))
         x.append(api_data[k])
 
@@ -50,31 +52,33 @@ def work():
 
 def getDataFromAPI(api_url):
     """
-    
+    takes a string http url
+    returns the data as a dict text
     """
+    return json.loads(req.get(api_url).text)
 
-    return data_dict
 
 
-def convertDateIntoLists(data):
+def convertDataIntoLists(data):
     """
     Takes data(dict) as a param and returns a tuple of x and y co-ordinates which are lists
     """
     x = []
     y = []
-    for k in api_data:
+    for k in data:
         y.append(datetime.strptime(k, '%d-%m-%Y'))
         x.append(api_data[k])
 
     return x, y
     
-def plotGraph(xaxis, yaxis, start, end):
+def plotGraph(x_axis, y_axis):
     """
-
+    Takes xaxis(list) a list of x co-ordinates
     """
 
     mpl.plot_date(y, x, xdate=True, ydate=False)
     mpl.show()
+
 
 def run():
     print(hello)
