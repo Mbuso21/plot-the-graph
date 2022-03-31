@@ -1,9 +1,6 @@
-from dataclasses import dataclass
-from urllib import response
 import matplotlib.pyplot as mpl
 from datetime import datetime
 import requests as req
-from datetime import date
 import json
 
 
@@ -45,6 +42,7 @@ def isDataDateBeforeStartDate(data_start_date, date_entered):
 
 
     return covertStringDateIntoDateTime(data_start_date) > covertStringDateIntoDateTime(date_entered)
+
 
     
 def plotGraph(x_axis, y_axis, start_date=0, end_date=0):
