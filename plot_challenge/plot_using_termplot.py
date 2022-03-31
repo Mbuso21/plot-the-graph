@@ -34,14 +34,14 @@ def covertStringDateIntoDateTime(str_date):
     return datetime.strptime(str_date, '%d-%m-%Y')
 
 
-def isDataDateBeforeStartDate(data_start_date, date_entered):
+def isDataDateBeforeStartDate(data_start_date, start_date_entered):
     """
     Both params take string date in format DD-MM-YYYY
-    returns True if data_start_date < date_entered else False
+    returns True if data_start_date >= start_date_entered else False
     """
 
 
-    return covertStringDateIntoDateTime(data_start_date) > covertStringDateIntoDateTime(date_entered)
+    return covertStringDateIntoDateTime(data_start_date) >= covertStringDateIntoDateTime(start_date_entered)
 
 
     
@@ -67,7 +67,3 @@ def run():
 
 if __name__ == "__main__":
     run()
-    # data_start_date = datetime.strptime("26-01-2022", "%d-%m-%Y")
-    # date_entered = datetime.strptime("26-01-2021", "%d-%m-%Y")
-    # check_bool = checkIfDateIsBeforeStartDate(data_start_date, date_entered)
-    # print(check_bool)
